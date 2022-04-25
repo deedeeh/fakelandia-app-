@@ -1,7 +1,29 @@
-.content-container--center {
-  text-align: center;
-}
-
 select {
  width: 200px;
 }
+
+.grid-container {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-rows: repeat(4, 2rem);
+}
+
+.item--border {
+  border-top: 1px solid var(--dark-gray);
+}
+
+@media screen and (min-width: 700px) {
+  .grid-container {
+    grid-template-columns: 7.5rem 7.5rem 13rem 13rem;
+    grid-auto-rows: auto;
+    margin: 1rem auto;
+  }
+  .content-container-md--center {
+    text-align: center;
+  }
+  .item--border {
+    border-top: none;
+    border-left: 1px solid var(--dark-gray);
+  }
+}
+
