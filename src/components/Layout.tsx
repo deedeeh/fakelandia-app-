@@ -9,9 +9,7 @@ const Layout: React.FC = () => (
       <h1 className='header__heading'>Fakelandia justice department</h1>
       <Navigation />
     </header>
-    <div>
-      <Outlet />
-    </div>
+    <Outlet />
     <Footer />
   </div>
 )
