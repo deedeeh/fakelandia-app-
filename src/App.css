@@ -78,3 +78,17 @@ body {
   color: var(--light-gray);
   width: 100%;
 }
+
+.home-container {
+  width: 70%;
+  margin: 2rem auto;
+}
+
+.home-heading {
+  font-size: 1.5rem;
+  color: var(--dark-gray)
+}
+
+.home-paragraph {
+  font-size: 1.2rem;
+}
