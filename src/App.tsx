@@ -4,13 +4,10 @@ import Router from './components/Router';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Fakelandia justice department</h1>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
-    </div>
-  );
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  )
 }
 
 export default App;
