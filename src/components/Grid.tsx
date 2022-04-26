@@ -5,6 +5,27 @@ import { MisdemeanoursContext } from '../App'
 const Grid: React.FC = () => {
   const misdemeanours = useContext(MisdemeanoursContext);
 
+  const misdemeanourMapping = () => {
+    let sentence: string = '';
+    return misdemeanours.map(misdemeanour => {
+      switch(misdemeanour.misdemeanour) {
+        case 'lift':
+          sentence = 'Speaking in a Lift = 🗣';
+          break;
+        case 'vegetables':
+          sentence = 'Not Eating Your Vegetables = 🥗';
+          break;
+        case 'rudeness':
+          sentence = 'Mild Public Rudeness = 🤪';
+          break;
+        case 'united':
+          sentence = 'Supporting Manchester United = 😈';
+          break
+      }
+      return <div className='cell' key={misdemeanour.citizenId}>{sentence}</div>
+    })
+  }
+
   return (
     <div className='grid-container'>
       <div className='table-head'>
@@ -17,7 +38,7 @@ const Grid: React.FC = () => {
       </div>
       <div className='table-head'>
         Misdemeanour
-        {misdemeanours.map(misdemeanour => (<div className='cell' key={misdemeanour.citizenId}>{misdemeanour.misdemeanour}</div>))}
+        {misdemeanourMapping()}
       </div>
       <div className='table-head'>Punishment Idea</div>
     </div>

@@ -14,7 +14,7 @@ function App() {
   }, [])
 
   const getMisdemeanours = async () => {
-    const generatedMisdemeanours = await generateMisdemeanours(2); 
+    const generatedMisdemeanours = await generateMisdemeanours(10); 
     setMisdemeanours(generatedMisdemeanours);
   }
 
