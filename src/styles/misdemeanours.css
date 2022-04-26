@@ -1,11 +1,11 @@
 select {
- width: 200px;
+  min-width: 200px;
 }
 
 .grid-container {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: grid;
-  grid-template-rows: repeat(4, 2rem);
+  width: 90vw;
 }
 
 .item--border {
@@ -13,13 +13,13 @@ select {
 }
 
 @media screen and (min-width: 700px) {
-  .grid-container {
-    grid-template-columns: 7.5rem 7.5rem 13rem 13rem;
-    grid-auto-rows: auto;
-    margin: 1rem auto;
-  }
   .content-container-md--center {
     text-align: center;
+  }
+  .grid-container {
+    grid-template-columns: 2fr 2fr 4fr 4fr;
+    margin: 1rem auto;
+    width: 90%;
   }
   .item--border {
     border-top: none;
