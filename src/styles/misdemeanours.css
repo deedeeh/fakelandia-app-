@@ -5,11 +5,12 @@ select {
 .grid-container {
   margin-top: 1.5rem;
   display: grid;
+  grid-template-columns: 2fr 2fr;
   width: 90vw;
 }
 
-.item--border {
-  border-top: 1px solid var(--dark-gray);
+.table-head, .cell {
+  text-align: center;
 }
 
 @media screen and (min-width: 700px) {
@@ -20,10 +21,6 @@ select {
     grid-template-columns: 2fr 2fr 4fr 4fr;
     margin: 1rem auto;
     width: 90%;
-  }
-  .item--border {
-    border-top: none;
-    border-left: 1px solid var(--dark-gray);
   }
 }
 
