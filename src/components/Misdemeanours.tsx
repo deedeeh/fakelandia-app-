@@ -1,6 +1,6 @@
 import React, { FormEvent, useContext } from 'react';
 import '../styles/misdemeanours.css'
-import Grid from './Grid';
+import Table from './Table';
 import { SelectedItemContext } from './Router';
 
 interface MisdemeanoursProps {
@@ -11,7 +11,7 @@ const Misdemeanours: React.FC<MisdemeanoursProps> = ({ handleOnChangeFilter }) =
   const selectedItem = useContext(SelectedItemContext)
 
   return(
-    <div className='content-container content-container-md--center'>
+    <div className='content-container content-container--center'>
       <select value={selectedItem} name='filterBy' id='filterBy' onChange={handleOnChangeFilter}>
         <option value='filter'>Filter</option>
         <option value='lift'>Lift</option>
@@ -19,7 +19,7 @@ const Misdemeanours: React.FC<MisdemeanoursProps> = ({ handleOnChangeFilter }) =
         <option value='rudeness'>Rudeness</option>
         <option value='united'>United</option>
       </select>
-      <Grid />
+      <Table />
     </div>
   )
 }
