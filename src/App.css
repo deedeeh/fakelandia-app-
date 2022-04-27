@@ -10,12 +10,13 @@ body {
 }
 
 .container {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  align-items: center; */
+  position: relative;
   width: 100vw;
+  min-height: 100vh;
 }
 
 .header {
@@ -72,6 +73,8 @@ body {
 .footer {
   display: flex;
   justify-content: center;
+  position: absolute;
+  bottom: 0;
   margin-top: auto;
   background-color: var(--dark-gray);
   color: var(--light-gray);
@@ -92,6 +95,9 @@ body {
 }
 
 @media screen and (min-width: 700px) {
+  /* .container {
+    height: 100vh;
+  } */
   .content-container {
     width: 80%;
     margin: 2rem auto;

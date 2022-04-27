@@ -11,23 +11,36 @@ const Grid: React.FC = () => {
   const selectedMisdemeanours = useContext(SelectedMisdemeanoursContext);
   const selectedItem = useContext(SelectedItemContext);
 
+  const randomNum = (x: number) => {
+    return Math.floor(Math.random() * x + 1);
+  }
+
   return (
     <div className='grid-container'>
       {selectedItem === 'filter' && (
         <>
         <div className='table-head'>
           Citizen ID
-          {misdemeanours.map(misdemeanour => (<div className='cell' key={misdemeanour.citizenId}>{misdemeanour.citizenId}</div>))}
+          {misdemeanours.map(misdemeanour => 
+            (<div className='cell' key={misdemeanour.citizenId}>{misdemeanour.citizenId}</div>)
+          )}
         </div>
         <div className='table-head'>
           Date
-          {misdemeanours.map(misdemeanour => (<div className='cell' key={misdemeanour.citizenId}>{misdemeanour.date}</div>))}
+          {misdemeanours.map(misdemeanour => 
+            (<div className='cell' key={misdemeanour.citizenId}>{misdemeanour.date}</div>)
+          )}
         </div>
         <div className='table-head'>
           Misdemeanour
           {MapMisdemeanours()}
         </div>
-        <div className='table-head'>Punishment Idea</div>
+        <div className='table-head'>
+          Punishment Idea
+          {misdemeanours.map((misdemeanour, index) => 
+            (<div className='cell' key={misdemeanour.citizenId}><img src={`https://picsum.photos/id/${randomNum(index)}/200`} alt=''/></div>)
+          )}
+        </div>
         </>
       )}
       {selectedItem !== 'filter' && (
