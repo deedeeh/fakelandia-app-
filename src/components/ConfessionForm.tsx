@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { ConfessionProps } from './Confession';
 import { ReasonTextContext, SelectedReasonContext, SubjectContext } from './Router';
+import SubjectInput from './SubjectInput';
+import ReasonSelect from './ReasonSelect';
+import ReasonTextInput from './ReasonTextInput';
 
 const ConfessionForm: React.FC<ConfessionProps> = ({ handleOnChangeSubject, handleOnChangeSelectReason, handleOnChangeReasonText }) => {
   const subject = useContext(SubjectContext);
@@ -10,29 +13,19 @@ const ConfessionForm: React.FC<ConfessionProps> = ({ handleOnChangeSubject, hand
   return(
     <div className='content-container'>
       <form>
-        <div>
-          <label id='subject'>
-            Subject:
-            <input type='text' value={subject} onChange={handleOnChangeSubject} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Reason for contact:
-            <select value={selectedReason} name='reason' id='reason' onChange={handleOnChangeSelectReason}>
-              <option value='select'>Select</option>
-              <option value='lift'>Lift</option>
-              <option value='vegetables'>Vegetables</option>
-              <option value='rudeness'>Rudeness</option>
-              <option value='united'>United</option>
-              <option value='talk'>I just want to talk</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <textarea value={reasonText} onChange={handleOnChangeReasonText} />
-        </div>
-        <button type='submit'>Confess</button>
+        <SubjectInput 
+          subject={subject} 
+          handleOnChangeSubject={handleOnChangeSubject} 
+        />
+        <ReasonSelect 
+          selectedReason={selectedReason}
+          handleOnChangeSelectReason={handleOnChangeSelectReason}
+        />
+        <ReasonTextInput 
+          reasonText={reasonText}
+          handleOnChangeReasonText={handleOnChangeReasonText}
+        />
+        <button type='submit' disabled>Confess</button>
       </form>
     </div>
   )
