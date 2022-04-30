@@ -13,13 +13,16 @@ export const SelectedItemContext = React.createContext<string>('filter');
 export const SubjectContext = React.createContext<string>('');
 export const SelectedReasonContext = React.createContext<string>('Select');
 export const ReasonTextContext = React.createContext<string>('');
+export const DisabledButtonContext = React.createContext<boolean>(true);
 
 const Router: React.FC = () => {
+  const isDisabled: boolean = true;
   const [ selectedMisdemeanours, setSelectedMisdemeanours] = useState<Array<IMisdemeanour>>([]);
   const [ selectedItem, setSelectedItem ] = useState<string>('filter');
   const [ subject, setSubject ] = useState<string>('');
-  const [ selectedReason, setSelectedReason ] = useState<string>('Select');
+  const [ selectedReason, setSelectedReason ] = useState<string>('select');
   const [ reasonText, setReasonText ] = useState<string>('');
+  const [ disabledButton, setDisabledButton ] = useState<boolean>(isDisabled);
 
   const misdemeanours = useContext(MisdemeanoursContext);
 
@@ -33,11 +36,21 @@ const Router: React.FC = () => {
   const handleOnChangeSubject = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSubject(e.target.value);
+    if(e.target.value.length >= 3 && e.target.value.length <= 50 && /^[a-zA-Z]+$/.test(e.target.value) && selectedReason !== 'select') {
+      setDisabledButton(false);
+    } else {
+      setDisabledButton(isDisabled);
+    }
   }
 
   const handleOnChangeSelectReason = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
     setSelectedReason(e.target.value);
+    if(subject.length >= 3 && subject.length <= 50 && /^[a-zA-Z]+$/.test(subject) && e.target.value !== 'select') { 
+      setDisabledButton(false) 
+    } else {
+      setDisabledButton(isDisabled)
+    };
   }
 
   const handleOnChangeReasonText = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -51,20 +64,22 @@ const Router: React.FC = () => {
         <SubjectContext.Provider value={subject}>
           <SelectedReasonContext.Provider value={selectedReason}>
             <ReasonTextContext.Provider value={reasonText}>
-              <Routes>
-                <Route path='/' element={<Layout />}>
-                  <Route index element={<Home />} />
-                  <Route path='/misdemeanours' element={<Misdemeanours handleOnChangeFilter={handleOnChangeFilter} />} />
-                  <Route path='/confession' element={
-                    <Confession 
-                      handleOnChangeSubject={handleOnChangeSubject}
-                      handleOnChangeSelectReason={handleOnChangeSelectReason}
-                      handleOnChangeReasonText={handleOnChangeReasonText}
-                    />} 
-                  />
-                  <Route path='*' element={<NotFound />} />
-                </Route>
-              </Routes>
+              <DisabledButtonContext.Provider value={disabledButton}>
+                <Routes>
+                  <Route path='/' element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path='/misdemeanours' element={<Misdemeanours handleOnChangeFilter={handleOnChangeFilter} />} />
+                    <Route path='/confession' element={
+                      <Confession 
+                        handleOnChangeSubject={handleOnChangeSubject}
+                        handleOnChangeSelectReason={handleOnChangeSelectReason}
+                        handleOnChangeReasonText={handleOnChangeReasonText}
+                      />} 
+                    />
+                    <Route path='*' element={<NotFound />} />
+                  </Route>
+                </Routes>
+              </DisabledButtonContext.Provider>
             </ReasonTextContext.Provider>
           </SelectedReasonContext.Provider>
         </SubjectContext.Provider>

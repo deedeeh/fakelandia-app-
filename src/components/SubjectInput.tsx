@@ -7,7 +7,7 @@ interface SubjectProps {
   handleOnChangeSubject: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, handleOnChangeSubject}) => {
+const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, handleOnChangeSubject }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -30,7 +30,6 @@ const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, handleOnChan
         <label id='subject'>
           Subject:
           <input 
-            required 
             type='text' 
             value={subject} 
             onChange={(e) => {
