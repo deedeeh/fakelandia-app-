@@ -1,8 +1,8 @@
-import {FormEvent} from 'react';
+import {ChangeEvent} from 'react';
 
 interface ReasonSelectProps {
   selectedReason: string;
-  handleOnChangeSelectReason: (e: FormEvent<HTMLSelectElement>) => void;
+  handleOnChangeSelectReason: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const ReasonSelect: React.FC<ReasonSelectProps> = ({ selectedReason, handleOnChangeSelectReason}) => {

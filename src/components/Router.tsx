@@ -1,4 +1,4 @@
-import React, { useState, useContext, FormEvent } from 'react';
+import React, { useState, useContext, ChangeEvent } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Confession from './Confession';
 import Home from './Home'
@@ -23,26 +23,26 @@ const Router: React.FC = () => {
 
   const misdemeanours = useContext(MisdemeanoursContext);
 
-  const handleOnChangeFilter = (e: FormEvent<HTMLSelectElement>) => {
+  const handleOnChangeFilter = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
     const filteredMisdemeanours = misdemeanours.filter(misdemeanour => misdemeanour.misdemeanour === e.currentTarget.value);
     setSelectedMisdemeanours(filteredMisdemeanours);
-    setSelectedItem(e.currentTarget.value);
+    setSelectedItem(e.target.value);
   }
 
-  const handleOnChangeSubject = (e: FormEvent<HTMLInputElement>) => {
+  const handleOnChangeSubject = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setSubject(e.currentTarget.value);
+    setSubject(e.target.value);
   }
 
-  const handleOnChangeSelectReason = (e: FormEvent<HTMLSelectElement>) => {
+  const handleOnChangeSelectReason = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
-    setSelectedReason(e.currentTarget.value);
+    setSelectedReason(e.target.value);
   }
 
-  const handleOnChangeReasonText = (e: FormEvent<HTMLTextAreaElement>) => {
+  const handleOnChangeReasonText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
-    setReasonText(e.currentTarget.value);
+    setReasonText(e.target.value);
   }
 
   return(

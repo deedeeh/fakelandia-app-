@@ -1,10 +1,10 @@
-import React, { FormEvent, useContext } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 import '../styles/misdemeanours.css'
 import Table from './Table';
 import { SelectedItemContext } from './Router';
 
 interface MisdemeanoursProps {
-  handleOnChangeFilter: (e: FormEvent<HTMLSelectElement>) => void
+  handleOnChangeFilter: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
 const Misdemeanours: React.FC<MisdemeanoursProps> = ({ handleOnChangeFilter }) => {
