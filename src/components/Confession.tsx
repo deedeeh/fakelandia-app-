@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import '../styles/confession.css';
 import ConfessionForm from './ConfessionForm';
 

@@ -36,7 +36,7 @@ const Router: React.FC = () => {
   const handleOnChangeSubject = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSubject(e.target.value);
-    if(e.target.value.length >= 3 && e.target.value.length <= 50 && /^[a-zA-Z]+$/.test(e.target.value) && selectedReason !== 'select') {
+    if(e.target.value.length >= 3 && e.target.value.length <= 50 && /^[a-zA-Z]+$/.test(e.target.value) && selectedReason !== 'select' && reasonText.length >= 18 && reasonText.length <= 150) {
       setDisabledButton(false);
     } else {
       setDisabledButton(isDisabled);
@@ -46,16 +46,21 @@ const Router: React.FC = () => {
   const handleOnChangeSelectReason = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
     setSelectedReason(e.target.value);
-    if(subject.length >= 3 && subject.length <= 50 && /^[a-zA-Z]+$/.test(subject) && e.target.value !== 'select') { 
+    if(subject.length >= 3 && subject.length <= 50 && /^[a-zA-Z]+$/.test(subject) && e.target.value !== 'select' && reasonText.length >= 18 && reasonText.length <= 150) { 
       setDisabledButton(false) 
     } else {
       setDisabledButton(isDisabled)
-    };
+    }
   }
 
   const handleOnChangeReasonText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     setReasonText(e.target.value);
+    if(subject.length >= 3 && subject.length <= 50 && /^[a-zA-Z]+$/.test(subject) && selectedReason !== 'select' && e.target.value.length >= 18 && e.target.value.length <= 150) { 
+      setDisabledButton(false) 
+    } else {
+      setDisabledButton(isDisabled)
+    }
   }
 
   return(
