@@ -9,7 +9,8 @@ describe('<ConfessionForm />', () => {
       disabledButton: true,
       handleOnChangeSubject: mockChange,
       handleOnChangeSelectReason: mockChange,
-      handleOnChangeReasonText: mockChange
+      handleOnChangeReasonText: mockChange,
+      handleOnSubmit: mockChange
     }
     render(<ConfessionForm {...formProps} />)
     const buttonElement = screen.getByRole('button');
@@ -22,7 +23,8 @@ describe('<ConfessionForm />', () => {
       disabledButton: true,
       handleOnChangeSubject: mockChange,
       handleOnChangeSelectReason: mockChange,
-      handleOnChangeReasonText: mockChange
+      handleOnChangeReasonText: mockChange,
+      handleOnSubmit: mockChange
     }
     render(<ConfessionForm {...formProps} />)
     const buttonElement = screen.getByRole('button');
@@ -34,7 +36,8 @@ describe('<ConfessionForm />', () => {
       disabledButton: false,
       handleOnChangeSubject: mockChange,
       handleOnChangeSelectReason: mockChange,
-      handleOnChangeReasonText: mockChange
+      handleOnChangeReasonText: mockChange,
+      handleOnSubmit: mockChange
     }
     render(<ConfessionForm {...formProps} />)
     const buttonElement = screen.getByRole('button');

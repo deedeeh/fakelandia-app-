@@ -1,4 +1,4 @@
-import React, { useState, useContext, ChangeEvent } from 'react';
+import React, { useState, useContext, ChangeEvent, FormEvent } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Confession from './Confession';
 import Home from './Home'
@@ -8,6 +8,7 @@ import Layout from './Layout';
 import { IMisdemeanour } from '../generate_misdemeanours';
 import { MisdemeanoursContext } from '../App';
 import { SelectedMisdemeanoursContext, SelectedItemContext, SubjectContext, SelectedReasonContext, ReasonTextContext } from './ReactContext';
+import SubmittedData from './SubmittedData';
 
 const Router: React.FC = () => {
   const [ selectedMisdemeanours, setSelectedMisdemeanours] = useState<Array<IMisdemeanour>>([]);
@@ -16,6 +17,7 @@ const Router: React.FC = () => {
   const [ selectedReason, setSelectedReason ] = useState<string>('select');
   const [ reasonText, setReasonText ] = useState<string>('');
   const [ disabledButton, setDisabledButton ] = useState<boolean>(true);
+  const [ submittedData, setSubmittedData ] = useState<SubmittedData>({subject, selectedReason, reasonText})
 
   const misdemeanours = useContext(MisdemeanoursContext);
 
@@ -56,6 +58,22 @@ const Router: React.FC = () => {
     }
   }
 
+  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = { subject, selectedReason, reasonText }
+    if(formData.selectedReason === 'talk') console.log(formData);
+    setSubmittedData({...formData});
+    setDisabledButton(true);
+    resetForm();
+  }
+ 
+  const resetForm = () => {
+    setSubject('');
+    setSelectedReason('select');
+    setReasonText('');
+  }
+    
+
   return(
     <SelectedMisdemeanoursContext.Provider value={selectedMisdemeanours}>
       <SelectedItemContext.Provider value={selectedItem}>
@@ -72,6 +90,7 @@ const Router: React.FC = () => {
                         handleOnChangeSubject={handleOnChangeSubject}
                         handleOnChangeSelectReason={handleOnChangeSelectReason}
                         handleOnChangeReasonText={handleOnChangeReasonText}
+                        handleOnSubmit={handleOnSubmit}
                       />} 
                     />
                     <Route path='*' element={<NotFound />} />

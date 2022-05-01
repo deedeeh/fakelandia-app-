@@ -1,4 +1,4 @@
-import React, { useContext, ChangeEvent } from 'react';
+import React, { useContext, ChangeEvent, FormEvent } from 'react';
 import { ReasonTextContext, SelectedReasonContext, SubjectContext } from './ReactContext';
 import SubjectInput from './SubjectInput';
 import ReasonSelect from './ReasonSelect';
@@ -9,9 +9,10 @@ interface ConfessionFormProps {
   handleOnChangeSubject: (e: ChangeEvent<HTMLInputElement>) => void;
   handleOnChangeSelectReason: (e: ChangeEvent<HTMLSelectElement>) => void;
   handleOnChangeReasonText: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  handleOnSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-const ConfessionForm: React.FC<ConfessionFormProps> = ({ disabledButton, handleOnChangeSubject, handleOnChangeSelectReason, handleOnChangeReasonText }) => {
+const ConfessionForm: React.FC<ConfessionFormProps> = ({ disabledButton, handleOnChangeSubject, handleOnChangeSelectReason, handleOnChangeReasonText, handleOnSubmit }) => {
   const subject = useContext(SubjectContext);
   const selectedReason = useContext(SelectedReasonContext);
   const reasonText = useContext(ReasonTextContext);
@@ -20,7 +21,7 @@ const ConfessionForm: React.FC<ConfessionFormProps> = ({ disabledButton, handleO
 
   return(
     <div className='content-container'>
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <SubjectInput 
           subject={subject} 
           isTouched={isTouched}
