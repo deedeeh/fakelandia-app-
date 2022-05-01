@@ -33,6 +33,7 @@ const ConfessionForm: React.FC<ConfessionFormProps> = ({ handleOnChangeSubject, 
         />
         <ReasonTextInput 
           reasonText={reasonText}
+          isTouched={isTouched}
           handleOnChangeReasonText={handleOnChangeReasonText}
         />
         <button type='submit' disabled={disabledButton}>Confess</button>
