@@ -36,7 +36,6 @@ const ReasonSelect: React.FC<ReasonSelectProps> = ({ selectedReason, isTouched, 
               const errorMessage = validate(e.target.value);
               setErrorMessage(errorMessage)
               handleOnChangeSelectReason(e);
-              // handleReasonSelectBtnValidation(e);
             }}
           >
             <option value='select'>Select</option>
