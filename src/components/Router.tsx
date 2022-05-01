@@ -7,22 +7,15 @@ import NotFound from './NotFound';
 import Layout from './Layout';
 import { IMisdemeanour } from '../generate_misdemeanours';
 import { MisdemeanoursContext } from '../App';
-
-export const SelectedMisdemeanoursContext = React.createContext<Array<IMisdemeanour>>([]);
-export const SelectedItemContext = React.createContext<string>('filter');
-export const SubjectContext = React.createContext<string>('');
-export const SelectedReasonContext = React.createContext<string>('Select');
-export const ReasonTextContext = React.createContext<string>('');
-export const DisabledButtonContext = React.createContext<boolean>(true);
+import { SelectedMisdemeanoursContext, SelectedItemContext, SubjectContext, SelectedReasonContext, ReasonTextContext } from './ReactContext';
 
 const Router: React.FC = () => {
-  const isDisabled: boolean = true;
   const [ selectedMisdemeanours, setSelectedMisdemeanours] = useState<Array<IMisdemeanour>>([]);
   const [ selectedItem, setSelectedItem ] = useState<string>('filter');
   const [ subject, setSubject ] = useState<string>('');
   const [ selectedReason, setSelectedReason ] = useState<string>('select');
   const [ reasonText, setReasonText ] = useState<string>('');
-  const [ disabledButton, setDisabledButton ] = useState<boolean>(isDisabled);
+  const [ disabledButton, setDisabledButton ] = useState<boolean>(true);
 
   const misdemeanours = useContext(MisdemeanoursContext);
 
@@ -39,7 +32,7 @@ const Router: React.FC = () => {
     if(e.target.value.length >= 3 && e.target.value.length <= 50 && /^[a-zA-Z]+$/.test(e.target.value) && selectedReason !== 'select' && reasonText.length >= 18 && reasonText.length <= 150) {
       setDisabledButton(false);
     } else {
-      setDisabledButton(isDisabled);
+      setDisabledButton(true);
     }
   }
 
@@ -49,7 +42,7 @@ const Router: React.FC = () => {
     if(subject.length >= 3 && subject.length <= 50 && /^[a-zA-Z]+$/.test(subject) && e.target.value !== 'select' && reasonText.length >= 18 && reasonText.length <= 150) { 
       setDisabledButton(false) 
     } else {
-      setDisabledButton(isDisabled)
+      setDisabledButton(true)
     }
   }
 
@@ -59,7 +52,7 @@ const Router: React.FC = () => {
     if(subject.length >= 3 && subject.length <= 50 && /^[a-zA-Z]+$/.test(subject) && selectedReason !== 'select' && e.target.value.length >= 18 && e.target.value.length <= 150) { 
       setDisabledButton(false) 
     } else {
-      setDisabledButton(isDisabled)
+      setDisabledButton(true)
     }
   }
 
@@ -69,13 +62,13 @@ const Router: React.FC = () => {
         <SubjectContext.Provider value={subject}>
           <SelectedReasonContext.Provider value={selectedReason}>
             <ReasonTextContext.Provider value={reasonText}>
-              <DisabledButtonContext.Provider value={disabledButton}>
                 <Routes>
                   <Route path='/' element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path='/misdemeanours' element={<Misdemeanours handleOnChangeFilter={handleOnChangeFilter} />} />
                     <Route path='/confession' element={
                       <Confession 
+                        disabledButton={disabledButton}
                         handleOnChangeSubject={handleOnChangeSubject}
                         handleOnChangeSelectReason={handleOnChangeSelectReason}
                         handleOnChangeReasonText={handleOnChangeReasonText}
@@ -84,7 +77,6 @@ const Router: React.FC = () => {
                     <Route path='*' element={<NotFound />} />
                   </Route>
                 </Routes>
-              </DisabledButtonContext.Provider>
             </ReasonTextContext.Provider>
           </SelectedReasonContext.Provider>
         </SubjectContext.Provider>

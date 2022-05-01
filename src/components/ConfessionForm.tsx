@@ -1,20 +1,20 @@
 import React, { useContext, ChangeEvent } from 'react';
-import { DisabledButtonContext, ReasonTextContext, SelectedReasonContext, SubjectContext } from './Router';
+import { ReasonTextContext, SelectedReasonContext, SubjectContext } from './ReactContext';
 import SubjectInput from './SubjectInput';
 import ReasonSelect from './ReasonSelect';
 import ReasonTextInput from './ReasonTextInput';
 
 interface ConfessionFormProps {
+  disabledButton: boolean;
   handleOnChangeSubject: (e: ChangeEvent<HTMLInputElement>) => void;
   handleOnChangeSelectReason: (e: ChangeEvent<HTMLSelectElement>) => void;
   handleOnChangeReasonText: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const ConfessionForm: React.FC<ConfessionFormProps> = ({ handleOnChangeSubject, handleOnChangeSelectReason, handleOnChangeReasonText }) => {
+const ConfessionForm: React.FC<ConfessionFormProps> = ({ disabledButton, handleOnChangeSubject, handleOnChangeSelectReason, handleOnChangeReasonText }) => {
   const subject = useContext(SubjectContext);
   const selectedReason = useContext(SelectedReasonContext);
   const reasonText = useContext(ReasonTextContext);
-  const disabledButton = useContext(DisabledButtonContext);
 
   const isTouched: boolean = false;
 
