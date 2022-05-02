@@ -20,8 +20,8 @@ const ConfessionForm: React.FC<ConfessionFormProps> = ({ disabledButton, handleO
   const isTouched: boolean = false;
 
   return(
-    <div className='content-container'>
-      <form onSubmit={handleOnSubmit}>
+    <div className='form-container'>
+      <form className='form' onSubmit={handleOnSubmit}>
         <SubjectInput 
           subject={subject} 
           isTouched={isTouched}
@@ -37,7 +37,7 @@ const ConfessionForm: React.FC<ConfessionFormProps> = ({ disabledButton, handleO
           isTouched={isTouched}
           handleOnChangeReasonText={handleOnChangeReasonText}
         />
-        <button type='submit' disabled={disabledButton}>Confess</button>
+        <button className='form__button' type='submit' disabled={disabledButton}>Confess</button>
       </form>
     </div>
   )

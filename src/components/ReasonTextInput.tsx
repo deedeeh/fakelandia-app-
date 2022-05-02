@@ -24,8 +24,9 @@ const ReasonTextInput: React.FC<ReasonTextProps> = ({ reasonText, isTouched, han
 
   return (
     <>
-      <div>
+      <div className='form__element'>
         <textarea 
+          className='form__textarea--bigger'
           placeholder='Please tell us more about your reason for contact.'
           value={reasonText} 
           onChange={(e) => {

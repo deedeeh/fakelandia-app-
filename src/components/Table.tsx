@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import '../styles/misdemeanours.css';
-import { MisdemeanoursContext } from '../App';
-import { SelectedItemContext, SelectedMisdemeanoursContext } from './ReactContext';
+import { MisdemeanoursContext, SelectedItemContext, SelectedMisdemeanoursContext } from './ReactContext';
 import MapMisdemeanours from './MapMisdemeanours';
 
 

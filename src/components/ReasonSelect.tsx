@@ -24,28 +24,29 @@ const ReasonSelect: React.FC<ReasonSelectProps> = ({ selectedReason, isTouched, 
 
   return (
     <>
-      <div>
+      <div className='form__element'>
         <label>
           Reason for contact:
-          <select 
-            value={selectedReason} 
-            name='reason' 
-            id='reason' 
-            onChange={(e) => {
-              setTouched(true);
-              const errorMessage = validate(e.target.value);
-              setErrorMessage(errorMessage)
-              handleOnChangeSelectReason(e);
-            }}
-          >
-            <option value='select'>Select</option>
-            <option value='lift'>Lift</option>
-            <option value='vegetables'>Vegetables</option>
-            <option value='rudeness'>Rudeness</option>
-            <option value='united'>United</option>
-            <option value='talk'>I just want to talk</option>
-          </select>
         </label>
+        &nbsp;
+        <select 
+          value={selectedReason} 
+          name='reason' 
+          id='reason' 
+          onChange={(e) => {
+            setTouched(true);
+            const errorMessage = validate(e.target.value);
+            setErrorMessage(errorMessage)
+            handleOnChangeSelectReason(e);
+          }}
+        >
+          <option value='select'>Select</option>
+          <option value='lift'>Lift</option>
+          <option value='vegetables'>Vegetables</option>
+          <option value='rudeness'>Rudeness</option>
+          <option value='united'>United</option>
+          <option value='talk'>I just want to talk</option>
+        </select>
       </div>
       <ErrorMessage message={errorMessage}/>
     </>

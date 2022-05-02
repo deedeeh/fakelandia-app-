@@ -1,25 +1,33 @@
-import React, { useState, useContext, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import generateMisdemeanours, { IMisdemeanour } from '../generate_misdemeanours'; 
 import Confession from './Confession';
 import Home from './Home'
 import Misdemeanours from './Misdemeanours';
 import NotFound from './NotFound';
 import Layout from './Layout';
-import { IMisdemeanour } from '../generate_misdemeanours';
-import { MisdemeanoursContext } from '../App';
-import { SelectedMisdemeanoursContext, SelectedItemContext, SubjectContext, SelectedReasonContext, ReasonTextContext } from './ReactContext';
+import { MisdemeanoursContext, SelectedMisdemeanoursContext, SelectedItemContext, SubjectContext, SelectedReasonContext, ReasonTextContext } from './ReactContext';
+import { Misdemeanour } from '../generate_misdemeanours';
 import SubmittedData from './SubmittedData';
+// import SubmittedData from './SubmittedData';
 
 const Router: React.FC = () => {
+  const [ misdemeanours, setMisdemeanours ] = useState<Array<IMisdemeanour>>([]);
   const [ selectedMisdemeanours, setSelectedMisdemeanours] = useState<Array<IMisdemeanour>>([]);
   const [ selectedItem, setSelectedItem ] = useState<string>('filter');
   const [ subject, setSubject ] = useState<string>('');
   const [ selectedReason, setSelectedReason ] = useState<string>('select');
   const [ reasonText, setReasonText ] = useState<string>('');
   const [ disabledButton, setDisabledButton ] = useState<boolean>(true);
-  const [ submittedData, setSubmittedData ] = useState<SubmittedData>({subject, selectedReason, reasonText})
 
-  const misdemeanours = useContext(MisdemeanoursContext);
+  useEffect(() => {
+    getMisdemeanours();
+  }, [])
+
+  const getMisdemeanours = async () => {
+    const generatedMisdemeanours = await generateMisdemeanours(10); 
+    setMisdemeanours(generatedMisdemeanours);
+  }
 
   const handleOnChangeFilter = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
@@ -61,8 +69,17 @@ const Router: React.FC = () => {
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = { subject, selectedReason, reasonText }
-    if(formData.selectedReason === 'talk') console.log(formData);
-    setSubmittedData({...formData});
+    if(formData.selectedReason === 'talk') { 
+      console.log(formData);
+    } 
+    // else if(formData.selectedReason !== 'talk' && formData.selectedReason !== 'select') {
+    //   const newMisdemeanour: IMisdemeanour = {
+    //     citizenId: Math.random() * 500,
+    //     misdemeanour: formData.selectedReason,
+    //     date: new Date().toLocaleDateString()
+    //   }
+    //   setMisdemeanours({...misdemeanours, newMisdemeanour});
+    // }
     setDisabledButton(true);
     resetForm();
   }
@@ -75,32 +92,34 @@ const Router: React.FC = () => {
     
 
   return(
-    <SelectedMisdemeanoursContext.Provider value={selectedMisdemeanours}>
-      <SelectedItemContext.Provider value={selectedItem}>
-        <SubjectContext.Provider value={subject}>
-          <SelectedReasonContext.Provider value={selectedReason}>
-            <ReasonTextContext.Provider value={reasonText}>
-                <Routes>
-                  <Route path='/' element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path='/misdemeanours' element={<Misdemeanours handleOnChangeFilter={handleOnChangeFilter} />} />
-                    <Route path='/confession' element={
-                      <Confession 
-                        disabledButton={disabledButton}
-                        handleOnChangeSubject={handleOnChangeSubject}
-                        handleOnChangeSelectReason={handleOnChangeSelectReason}
-                        handleOnChangeReasonText={handleOnChangeReasonText}
-                        handleOnSubmit={handleOnSubmit}
-                      />} 
-                    />
-                    <Route path='*' element={<NotFound />} />
-                  </Route>
-                </Routes>
-            </ReasonTextContext.Provider>
-          </SelectedReasonContext.Provider>
-        </SubjectContext.Provider>
-      </SelectedItemContext.Provider>
-    </SelectedMisdemeanoursContext.Provider>
+    <MisdemeanoursContext.Provider value={misdemeanours}>
+      <SelectedMisdemeanoursContext.Provider value={selectedMisdemeanours}>
+        <SelectedItemContext.Provider value={selectedItem}>
+          <SubjectContext.Provider value={subject}>
+            <SelectedReasonContext.Provider value={selectedReason}>
+              <ReasonTextContext.Provider value={reasonText}>
+                  <Routes>
+                    <Route path='/' element={<Layout />}>
+                      <Route index element={<Home />} />
+                      <Route path='/misdemeanours' element={<Misdemeanours handleOnChangeFilter={handleOnChangeFilter} />} />
+                      <Route path='/confession' element={
+                        <Confession 
+                          disabledButton={disabledButton}
+                          handleOnChangeSubject={handleOnChangeSubject}
+                          handleOnChangeSelectReason={handleOnChangeSelectReason}
+                          handleOnChangeReasonText={handleOnChangeReasonText}
+                          handleOnSubmit={handleOnSubmit}
+                        />} 
+                      />
+                      <Route path='*' element={<NotFound />} />
+                    </Route>
+                  </Routes>
+              </ReasonTextContext.Provider>
+            </SelectedReasonContext.Provider>
+          </SubjectContext.Provider>
+        </SelectedItemContext.Provider>
+      </SelectedMisdemeanoursContext.Provider>
+    </MisdemeanoursContext.Provider>
   )
 }
 

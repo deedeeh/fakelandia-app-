@@ -1,6 +1,7 @@
 import React from 'react';
 import { IMisdemeanour } from '../generate_misdemeanours';
 
+export const MisdemeanoursContext = React.createContext<Array<IMisdemeanour>>([]);
 export const SelectedMisdemeanoursContext = React.createContext<Array<IMisdemeanour>>([]);
 export const SelectedItemContext = React.createContext<string>('filter');
 export const SubjectContext = React.createContext<string>('');

@@ -26,19 +26,22 @@ const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, handleOnChan
 
   return (
     <>
-      <div>
+      <div className='form__element'>
         <label id='subject'>
           Subject:
-          <input 
-            type='text' 
-            value={subject} 
-            onChange={(e) => {
-              setTouched(true);
-              const errorMessage = validate(e.target.value);
-              setErrorMessage(errorMessage)
-              handleOnChangeSubject(e)
-            }} />
         </label>
+        &nbsp;
+        <input 
+          className='form__input--bigger'
+          type='text' 
+          value={subject} 
+          onChange={(e) => {
+            setTouched(true);
+            const errorMessage = validate(e.target.value);
+            setErrorMessage(errorMessage)
+            handleOnChangeSubject(e)
+          }} 
+        />
       </div>
       <ErrorMessage message={errorMessage}/>
     </>
