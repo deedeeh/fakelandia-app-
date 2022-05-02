@@ -1,8 +1,6 @@
-import { Misdemeanour } from '../generate_misdemeanours';
-
 interface SubmittedData {
   subject: string;
-  selectedReason: Misdemeanour;
+  selectedReason: string;
   reasonText: string;
 }
 

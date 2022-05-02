@@ -4,7 +4,7 @@ import Table from './Table';
 import { SelectedItemContext } from './ReactContext';
 
 interface MisdemeanoursProps {
-  handleOnChangeFilter: (e: ChangeEvent<HTMLSelectElement>) => void
+  handleOnChangeFilter: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Misdemeanours: React.FC<MisdemeanoursProps> = ({ handleOnChangeFilter }) => {

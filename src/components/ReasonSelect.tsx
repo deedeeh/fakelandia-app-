@@ -1,4 +1,4 @@
-import {ChangeEvent, useState, useCallback, useEffect} from 'react';
+import {ChangeEvent, useState, useCallback, useEffect } from 'react';
 import ErrorMessage from './ErrorMessage';
 
 interface ReasonSelectProps {

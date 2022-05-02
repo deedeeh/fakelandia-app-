@@ -4,7 +4,7 @@ import { MisdemeanoursContext, SelectedItemContext, SelectedMisdemeanoursContext
 import MapMisdemeanours from './MapMisdemeanours';
 
 
-const Table: React.FC = () => {
+const Table = () => {
   const misdemeanours = useContext(MisdemeanoursContext);
   const selectedMisdemeanours = useContext(SelectedMisdemeanoursContext);
   const selectedItem = useContext(SelectedItemContext);

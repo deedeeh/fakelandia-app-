@@ -7,9 +7,7 @@ import Misdemeanours from './Misdemeanours';
 import NotFound from './NotFound';
 import Layout from './Layout';
 import { MisdemeanoursContext, SelectedMisdemeanoursContext, SelectedItemContext, SubjectContext, SelectedReasonContext, ReasonTextContext } from './ReactContext';
-import { Misdemeanour } from '../generate_misdemeanours';
 import SubmittedData from './SubmittedData';
-// import SubmittedData from './SubmittedData';
 
 const Router: React.FC = () => {
   const [ misdemeanours, setMisdemeanours ] = useState<Array<IMisdemeanour>>([]);
@@ -19,6 +17,7 @@ const Router: React.FC = () => {
   const [ selectedReason, setSelectedReason ] = useState<string>('select');
   const [ reasonText, setReasonText ] = useState<string>('');
   const [ disabledButton, setDisabledButton ] = useState<boolean>(true);
+  const [ submittedData, setSubmittedData ] = useState<SubmittedData>({subject, selectedReason, reasonText});
 
   useEffect(() => {
     getMisdemeanours();
@@ -72,6 +71,10 @@ const Router: React.FC = () => {
     if(formData.selectedReason === 'talk') { 
       console.log(formData);
     } 
+    setDisabledButton(true);
+    resetForm();
+    // I get error here because of typescript union type with misdemeanour doesn't match string the type of selectedReason state
+    
     // else if(formData.selectedReason !== 'talk' && formData.selectedReason !== 'select') {
     //   const newMisdemeanour: IMisdemeanour = {
     //     citizenId: Math.random() * 500,
@@ -80,8 +83,6 @@ const Router: React.FC = () => {
     //   }
     //   setMisdemeanours({...misdemeanours, newMisdemeanour});
     // }
-    setDisabledButton(true);
-    resetForm();
   }
  
   const resetForm = () => {
