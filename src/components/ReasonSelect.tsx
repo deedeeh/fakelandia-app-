@@ -25,7 +25,7 @@ const ReasonSelect: React.FC<ReasonSelectProps> = ({ selectedReason, isTouched, 
   return (
     <>
       <div className='form__element'>
-        <label>
+        <label htmlFor='reason'>
           Reason for contact:
         </label>
         &nbsp;

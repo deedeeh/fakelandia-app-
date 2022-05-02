@@ -27,11 +27,12 @@ const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, handleOnChan
   return (
     <>
       <div className='form__element'>
-        <label id='subject'>
+        <label htmlFor='subject'>
           Subject:
         </label>
         &nbsp;
         <input 
+          id='subject'
           className='form__input--bigger'
           type='text' 
           value={subject} 
