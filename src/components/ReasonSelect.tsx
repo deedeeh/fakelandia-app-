@@ -4,10 +4,11 @@ import ErrorMessage from './ErrorMessage';
 interface ReasonSelectProps {
   selectedReason: string;
   isTouched: boolean;
+  showErrorMessage: boolean;
   handleOnChangeSelectReason: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const ReasonSelect: React.FC<ReasonSelectProps> = ({ selectedReason, isTouched, handleOnChangeSelectReason }) => {
+const ReasonSelect: React.FC<ReasonSelectProps> = ({ selectedReason, isTouched, showErrorMessage, handleOnChangeSelectReason }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -48,7 +49,9 @@ const ReasonSelect: React.FC<ReasonSelectProps> = ({ selectedReason, isTouched, 
           <option value='talk'>I just want to talk</option>
         </select>
       </div>
-      <ErrorMessage message={errorMessage}/>
+      {showErrorMessage && touched && (
+        <ErrorMessage message={errorMessage}/>
+      )}
     </>
   )
 }

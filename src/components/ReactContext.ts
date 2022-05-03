@@ -7,3 +7,4 @@ export const SelectedItemContext = React.createContext<string>('filter');
 export const SubjectContext = React.createContext<string>('');
 export const SelectedReasonContext = React.createContext<string>('Select');
 export const ReasonTextContext = React.createContext<string>('');
+export const ShowErrorMessageContext = React.createContext<boolean>(true);

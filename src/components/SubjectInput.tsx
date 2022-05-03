@@ -1,13 +1,14 @@
-import React, {ChangeEvent, useEffect, useState, useCallback} from 'react';
+import React, { ChangeEvent, useEffect, useState, useCallback } from 'react';
 import ErrorMessage from './ErrorMessage';
 
 interface SubjectProps {
   subject: string;
   isTouched: boolean;
+  showErrorMessage: boolean;
   handleOnChangeSubject: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, handleOnChangeSubject }) => {
+const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, showErrorMessage, handleOnChangeSubject }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -44,7 +45,9 @@ const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, handleOnChan
           }} 
         />
       </div>
-      <ErrorMessage message={errorMessage}/>
+      {showErrorMessage && touched && (
+        <ErrorMessage message={errorMessage}/>
+      )}
     </>
   )
 }

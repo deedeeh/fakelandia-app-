@@ -1,13 +1,14 @@
-import {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import ErrorMessage from './ErrorMessage';
 
 interface ReasonTextProps {
   reasonText: string;
   isTouched: boolean;
+  showErrorMessage: boolean;
   handleOnChangeReasonText: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const ReasonTextInput: React.FC<ReasonTextProps> = ({ reasonText, isTouched, handleOnChangeReasonText }) => {
+const ReasonTextInput: React.FC<ReasonTextProps> = ({ reasonText, isTouched, showErrorMessage, handleOnChangeReasonText }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -36,7 +37,9 @@ const ReasonTextInput: React.FC<ReasonTextProps> = ({ reasonText, isTouched, han
             handleOnChangeReasonText(e)
           }} />
       </div>
-      <ErrorMessage message={errorMessage} />
+      {showErrorMessage && touched && (
+        <ErrorMessage message={errorMessage} />
+      )}
     </>
   )
 }

@@ -8,6 +8,7 @@ describe('<ReasonSelect />', () => {
     const reasonSelectProps = {
       selectedReason: 'lift',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSelectReason: mockChange
     }
     render(<ReasonSelect {...reasonSelectProps} />); 
@@ -19,6 +20,7 @@ describe('<ReasonSelect />', () => {
     const reasonSelectProps = {
       selectedReason: 'lift',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSelectReason: mockChange
     }
     render(<ReasonSelect {...reasonSelectProps} />); 
@@ -30,6 +32,7 @@ describe('<ReasonSelect />', () => {
     const reasonSelectProps = {
       selectedReason: 'lift',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSelectReason: mockChange
     }
     render(<ReasonSelect {...reasonSelectProps} />); 
@@ -43,6 +46,7 @@ describe('<ReasonSelect />', () => {
     const reasonSelectProps = {
       selectedReason: 'lift',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSelectReason: mockChange
     }
     render(<ReasonSelect {...reasonSelectProps} />); 
@@ -54,6 +58,7 @@ describe('<ReasonSelect />', () => {
     const reasonSelectProps = {
       selectedReason: 'select',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSelectReason: mockChange
     }
     render(<ReasonSelect {...reasonSelectProps} />); 

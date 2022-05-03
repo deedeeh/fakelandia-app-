@@ -9,6 +9,7 @@ describe('<ReasonTextInput />', () => {
     const reasonTextProps = {
       reasonText: 'I wanted to confess long time ago regarding not eating my vegetables!',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeReasonText: mockChange
     }
     render(<ReasonTextInput {...reasonTextProps} />); 
@@ -20,6 +21,7 @@ describe('<ReasonTextInput />', () => {
     const reasonTextProps = {
       reasonText: 'I wanted to confess long time ago regarding not eating my vegetables!',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeReasonText: mockChange
     }
     render(<ReasonTextInput {...reasonTextProps} />); 
@@ -31,6 +33,7 @@ describe('<ReasonTextInput />', () => {
     const reasonTextProps = {
       reasonText: '',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeReasonText: mockChange
     }
     render(<ReasonTextInput {...reasonTextProps} />); 
@@ -46,6 +49,7 @@ describe('<ReasonTextInput />', () => {
     const reasonTextProps = {
       reasonText: 'I wanted to confess long time ago regarding not eating my vegetables!',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeReasonText: mockChange
     }
     render(<ReasonTextInput {...reasonTextProps} />); 
@@ -57,6 +61,7 @@ describe('<ReasonTextInput />', () => {
     const reasonTextProps = {
       reasonText: 'Nothing to say',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeReasonText: mockChange
     }
     render(<ReasonTextInput {...reasonTextProps} />); 

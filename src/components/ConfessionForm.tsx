@@ -1,5 +1,5 @@
 import React, { useContext, ChangeEvent, FormEvent } from 'react';
-import { ReasonTextContext, SelectedReasonContext, SubjectContext } from './ReactContext';
+import { ReasonTextContext, SelectedReasonContext, ShowErrorMessageContext, SubjectContext } from './ReactContext';
 import SubjectInput from './SubjectInput';
 import ReasonSelect from './ReasonSelect';
 import ReasonTextInput from './ReasonTextInput';
@@ -16,6 +16,7 @@ const ConfessionForm: React.FC<ConfessionFormProps> = ({ disabledButton, handleO
   const subject = useContext(SubjectContext);
   const selectedReason = useContext(SelectedReasonContext);
   const reasonText = useContext(ReasonTextContext);
+  const showErrorMessage = useContext(ShowErrorMessageContext);
 
   const isTouched: boolean = false;
 
@@ -25,16 +26,19 @@ const ConfessionForm: React.FC<ConfessionFormProps> = ({ disabledButton, handleO
         <SubjectInput 
           subject={subject} 
           isTouched={isTouched}
+          showErrorMessage={showErrorMessage}
           handleOnChangeSubject={handleOnChangeSubject} 
         />
         <ReasonSelect 
           selectedReason={selectedReason}
           isTouched={isTouched}
+          showErrorMessage={showErrorMessage}
           handleOnChangeSelectReason={handleOnChangeSelectReason}
         />
         <ReasonTextInput 
           reasonText={reasonText}
           isTouched={isTouched}
+          showErrorMessage={showErrorMessage}
           handleOnChangeReasonText={handleOnChangeReasonText}
         />
         <button className='form__button' type='submit' disabled={disabledButton}>Confess</button>

@@ -6,7 +6,7 @@ import Home from './Home'
 import Misdemeanours from './Misdemeanours';
 import NotFound from './NotFound';
 import Layout from './Layout';
-import { MisdemeanoursContext, SelectedMisdemeanoursContext, SelectedItemContext, SubjectContext, SelectedReasonContext, ReasonTextContext } from './ReactContext';
+import { MisdemeanoursContext, SelectedMisdemeanoursContext, SelectedItemContext, SubjectContext, SelectedReasonContext, ReasonTextContext, ShowErrorMessageContext } from './ReactContext';
 import SubmittedData from './SubmittedData';
 
 const Router: React.FC = () => {
@@ -17,7 +17,8 @@ const Router: React.FC = () => {
   const [ selectedReason, setSelectedReason ] = useState<string>('select');
   const [ reasonText, setReasonText ] = useState<string>('');
   const [ disabledButton, setDisabledButton ] = useState<boolean>(true);
-  const [ submittedData, setSubmittedData ] = useState<SubmittedData>({subject, selectedReason, reasonText});
+  const [ showErrorMessage, setShowErrorMessage ] = useState<boolean>(true);
+  // const [ submittedData, setSubmittedData ] = useState<SubmittedData>({subject, selectedReason, reasonText});
 
   useEffect(() => {
     getMisdemeanours();
@@ -72,9 +73,10 @@ const Router: React.FC = () => {
       console.log(formData);
     } 
     setDisabledButton(true);
+    setShowErrorMessage(false);
     resetForm();
     // I get error here because of typescript union type with misdemeanour doesn't match string the type of selectedReason state
-    
+
     // else if(formData.selectedReason !== 'talk' && formData.selectedReason !== 'select') {
     //   const newMisdemeanour: IMisdemeanour = {
     //     citizenId: Math.random() * 500,
@@ -99,6 +101,7 @@ const Router: React.FC = () => {
           <SubjectContext.Provider value={subject}>
             <SelectedReasonContext.Provider value={selectedReason}>
               <ReasonTextContext.Provider value={reasonText}>
+                <ShowErrorMessageContext.Provider value={showErrorMessage}>
                   <Routes>
                     <Route path='/' element={<Layout />}>
                       <Route index element={<Home />} />
@@ -115,6 +118,7 @@ const Router: React.FC = () => {
                       <Route path='*' element={<NotFound />} />
                     </Route>
                   </Routes>
+                </ShowErrorMessageContext.Provider>
               </ReasonTextContext.Provider>
             </SelectedReasonContext.Provider>
           </SubjectContext.Provider>

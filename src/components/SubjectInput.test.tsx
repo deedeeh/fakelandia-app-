@@ -9,6 +9,7 @@ describe('<SubjectInput />', () => {
     const subjectProps = {
       subject: 'Confession',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSubject: mockChange
     }
     render(<SubjectInput {...subjectProps} />); 
@@ -20,6 +21,7 @@ describe('<SubjectInput />', () => {
     const subjectProps = {
       subject: 'Confession',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSubject: mockChange
     }
     render(<SubjectInput {...subjectProps} />); 
@@ -31,6 +33,7 @@ describe('<SubjectInput />', () => {
     const subjectProps = {
       subject: '',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSubject: mockChange
     }
     render(<SubjectInput {...subjectProps} />); 
@@ -46,6 +49,7 @@ describe('<SubjectInput />', () => {
     const subjectProps = {
       subject: 'Confession',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSubject: mockChange
     }
     render(<SubjectInput {...subjectProps} />); 
@@ -57,6 +61,7 @@ describe('<SubjectInput />', () => {
     const subjectProps = {
       subject: 'Confession',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSubject: mockChange
     }
     render(<SubjectInput {...subjectProps} />); 
@@ -68,6 +73,7 @@ describe('<SubjectInput />', () => {
     const subjectProps = {
       subject: 'Co',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSubject: mockChange
     }
     render(<SubjectInput {...subjectProps} />); 
@@ -79,6 +85,7 @@ describe('<SubjectInput />', () => {
     const subjectProps = {
       subject: 'Confession 1',
       isTouched: true,
+      showErrorMessage: true,
       handleOnChangeSubject: mockChange
     }
     render(<SubjectInput {...subjectProps} />); 
