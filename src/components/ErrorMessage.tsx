@@ -1,6 +1,4 @@
 const ErrorMessage: React.FC<{message: string}> = ({ message }) => 
-  <div>
-    <p className='error-message'>{message}</p>
-  </div>
+  <p className='error-message'>{message}</p>
 
 export default ErrorMessage;

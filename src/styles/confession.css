@@ -28,7 +28,8 @@ body {
 }
 
 .form__element {
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
+  margin-top: 0.7rem;
   display: flex;
   justify-content: flex-end;
 }
@@ -43,7 +44,7 @@ body {
 }
 
 .form__button {
-  margin: 0 auto;
+  margin: 1rem auto 0;
   padding: 0.2rem 0;
   font-size: 1rem;
   width: 40%;
@@ -62,6 +63,7 @@ body {
 
 .error-message {
   text-align: right;
+  margin: 0;
 }
 
 @media screen and (min-width: 700px) {

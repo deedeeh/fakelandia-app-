@@ -1,24 +1,24 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import generateMisdemeanours, { IMisdemeanour } from '../generate_misdemeanours'; 
+import generateMisdemeanours, { IMisdemeanour, Misdemeanour } from '../generate_misdemeanours'; 
 import Confession from './Confession';
 import Home from './Home'
 import Misdemeanours from './Misdemeanours';
 import NotFound from './NotFound';
 import Layout from './Layout';
 import { MisdemeanoursContext, SelectedMisdemeanoursContext, SelectedItemContext, SubjectContext, SelectedReasonContext, ReasonTextContext, ShowErrorMessageContext } from './ReactContext';
-import SubmittedData from './SubmittedData';
 
 const Router: React.FC = () => {
   const [ misdemeanours, setMisdemeanours ] = useState<Array<IMisdemeanour>>([]);
   const [ selectedMisdemeanours, setSelectedMisdemeanours] = useState<Array<IMisdemeanour>>([]);
   const [ selectedItem, setSelectedItem ] = useState<string>('filter');
   const [ subject, setSubject ] = useState<string>('');
-  const [ selectedReason, setSelectedReason ] = useState<string>('select');
+  const [ selectedReason, setSelectedReason ] = useState<'select' | 'talk' | Misdemeanour>('select');
   const [ reasonText, setReasonText ] = useState<string>('');
   const [ disabledButton, setDisabledButton ] = useState<boolean>(true);
   const [ showErrorMessage, setShowErrorMessage ] = useState<boolean>(true);
-  // const [ submittedData, setSubmittedData ] = useState<SubmittedData>({subject, selectedReason, reasonText});
+  const [ formSubmission, setFormSubmission ] = useState<boolean>(false);
+  const [ confessionCitizenId, setConfessionCitizenId ] = useState<number>(0);
 
   useEffect(() => {
     getMisdemeanours();
@@ -46,8 +46,13 @@ const Router: React.FC = () => {
     }
   }
 
+  function isReason ( reason: string) : reason is 'select' | 'talk' | Misdemeanour {
+    return (reason as 'select' | 'talk' | Misdemeanour) !== undefined;
+  }
+
   const handleOnChangeSelectReason = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
+    if(!isReason(e.target.value)) { throw new Error('Yikes'); }
     setSelectedReason(e.target.value);
     if(subject.length >= 3 && subject.length <= 50 && /^[a-zA-Z]+$/.test(subject) && e.target.value !== 'select' && reasonText.length >= 18 && reasonText.length <= 150) { 
       setDisabledButton(false) 
@@ -75,25 +80,25 @@ const Router: React.FC = () => {
     setDisabledButton(true);
     setShowErrorMessage(false);
     resetForm();
-    // I get error here because of typescript union type with misdemeanour doesn't match string the type of selectedReason state
 
-    // else if(formData.selectedReason !== 'talk' && formData.selectedReason !== 'select') {
-    //   const newMisdemeanour: IMisdemeanour = {
-    //     citizenId: Math.random() * 500,
-    //     misdemeanour: formData.selectedReason,
-    //     date: new Date().toLocaleDateString()
-    //   }
-    //   setMisdemeanours({...misdemeanours, newMisdemeanour});
-    // }
+    if(formData.selectedReason !== 'talk' && formData.selectedReason !== 'select') {
+      const newMisdemeanour: IMisdemeanour = {
+        citizenId: Math.floor(Math.random() * 500),
+        misdemeanour: formData.selectedReason,
+        date: new Date().toLocaleDateString()
+      }
+      setMisdemeanours([...misdemeanours, newMisdemeanour]);
+      setConfessionCitizenId(newMisdemeanour.citizenId);
+      setFormSubmission(true);
+    }
   }
- 
+
   const resetForm = () => {
     setSubject('');
     setSelectedReason('select');
     setReasonText('');
   }
-    
-
+  
   return(
     <MisdemeanoursContext.Provider value={misdemeanours}>
       <SelectedMisdemeanoursContext.Provider value={selectedMisdemeanours}>
@@ -109,6 +114,8 @@ const Router: React.FC = () => {
                       <Route path='/confession' element={
                         <Confession 
                           disabledButton={disabledButton}
+                          formSubmission={formSubmission}
+                          confessionCitizenId={confessionCitizenId}
                           handleOnChangeSubject={handleOnChangeSubject}
                           handleOnChangeSelectReason={handleOnChangeSelectReason}
                           handleOnChangeReasonText={handleOnChangeReasonText}

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import '../styles/misdemeanours.css';
 import { MisdemeanoursContext, SelectedItemContext, SelectedMisdemeanoursContext } from './ReactContext';
 import MapMisdemeanours from './MapMisdemeanours';
@@ -32,7 +32,7 @@ const Table = () => {
           ))}
         </tbody>
         )}
-        {selectedItem !== 'filter' && selectedMisdemeanours.length > 0 && (
+        {selectedItem !== 'filter' && selectedMisdemeanours.length >= 1 && (
         <tbody>
           {selectedMisdemeanours.map((misdemeanour, index) => (
             <tr key={misdemeanour.citizenId}>
@@ -45,6 +45,9 @@ const Table = () => {
         </tbody>
         )}
       </table>
+      {selectedItem !== 'filter' && selectedMisdemeanours.length === 0 && (
+        <p>Sorry we don't have records of {selectedItem.toUpperCase()}.</p>
+      )}
     </div>
   )
 }

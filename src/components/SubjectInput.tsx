@@ -47,7 +47,7 @@ const SubjectInput: React.FC<SubjectProps> = ({ subject, isTouched, showErrorMes
       </div>
       {showErrorMessage && touched && (
         <ErrorMessage message={errorMessage}/>
-      )}
+      )} 
     </>
   )
 }

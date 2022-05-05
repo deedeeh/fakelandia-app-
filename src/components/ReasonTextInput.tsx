@@ -39,7 +39,7 @@ const ReasonTextInput: React.FC<ReasonTextProps> = ({ reasonText, isTouched, sho
       </div>
       {showErrorMessage && touched && (
         <ErrorMessage message={errorMessage} />
-      )}
+      )} 
     </>
   )
 }
